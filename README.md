@@ -1,2 +1,2 @@
 # bookbot
-first project on boot.dev
+first project on github using boot.dev course.
