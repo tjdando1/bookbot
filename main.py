@@ -2,7 +2,17 @@
 import os
 
 def main():
-   while True: 
+            
+    continue_scans = 1
+    
+    while True: 
+        if continue_scans == 0:
+                    break
+        if not os.path.exists('books'):
+            print("The 'books' directory does not exist. Creating one now...")
+            os.makedirs('books')
+            print("'books' directory created.")
+
         book = input("Please enter book name: (or type 'exit' to quit): ")
         book_name = book.lower()
 
@@ -16,6 +26,7 @@ def main():
         
         if os.path.isfile(path) and path.endswith(".txt"):
             try:
+                
                 text = get_contents(path)
                 words = word_count(text)
                 letter_count = letters(text)
@@ -33,11 +44,23 @@ def main():
                 print("-----------------------------")
                 print (f"Total words found: {words}")
                 print("-----------------------------")
+                
+                while True:
+                    scan_another = input("would you like to scan another book? y/n")
+                    if scan_another.lower() == "y":
+                        break
+                    elif scan_another.lower() == "n":
+                        continue_scans = 0
+                        break
+                    else:
+                        print("please type 'y' or 'n': ")
+                    
             except Exception as e:
                 print(e)
         else:
             print(f"{book} not found, please ensure you have typed name correctly!")
-        
+       
+
 def letter_sort(letter_dict):
     letter_lst_dicts = []
     for letter, count in letter_dict.items():
